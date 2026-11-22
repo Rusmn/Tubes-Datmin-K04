@@ -1,0 +1,5 @@
+min_support,frequent_1itemsets,frequent_2itemsets,frequent_3itemsets,frequent_itemsets_total,association_rules,apriori_detik,fpgrowth_detik,hasil_sama,impl_apriori,impl_fpgrowth
+0.001,601,605,714,2713,5798,18.86,9.25,True,mlxtend,mlxtend
+0.005,69,21,1,91,8,0.21,1.97,True,mlxtend,mlxtend
+0.01,30,1,0,31,1,0.05,0.55,True,mlxtend,mlxtend
+0.02,6,0,0,6,0,0.0,0.08,True,mlxtend,mlxtend
