@@ -1,0 +1,7 @@
+jupyterlab
+lxml
+matplotlib
+mlxtend
+numpy
+pandas
+scipy
