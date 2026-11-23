@@ -52,7 +52,7 @@ Simpan kedua berkas berikut dalam direktori `data/raw/`.
 | [Arsip XML DBLP](https://dblp.org/xml/dblp.xml.gz) | `data/raw/dblp.xml.gz` |
 | [DTD DBLP](https://dblp.org/xml/dblp.dtd) | `data/raw/dblp.dtd` |
 
-Eksperimen di repositori ini menggunakan arsip DBLP yang diunduh pada 19 November 2026. Pembaruan data DBLP dapat memengaruhi hasil pengulangan.
+Sebagai catatan, eksperimen ini menggunakan arsip DBLP yang diunduh pada 19 November 2026. Pembaruan data DBLP dapat memengaruhi hasil pengulangan.
 
 ### Jalankan notebook
 
