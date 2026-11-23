@@ -72,4 +72,4 @@ python src/preprocess.py
 python src/analysis.py
 ```
 
-Kedua cara menjalankan analisis dapat menimpa berkas hasil di `output/`.
+Sebagai catatan, menjalankan ulang notebook atau skrip dapat menimpa hasil yang tersimpan di `output/`.
