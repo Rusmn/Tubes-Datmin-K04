@@ -28,9 +28,13 @@ Apriori dan FP-Growth diuji pada ambang *support* 0,1%, 0,5%, 1%, dan 2% untuk t
 | [`output/figures/`](output/figures/) | Grafik dari keluaran notebook |
 | [`requirements.txt`](requirements.txt) | Dependensi Python |
 
-## Menjalankan analisis
+## Menjalankan analisis secara lokal
 
-Dari direktori utama repositori, pasang dependensi dalam lingkungan virtual.
+Buka [notebook di GitHub](notebooks/DBLP_Association_Mining.ipynb) untuk melihat hasil yang sudah tersimpan. Langkah di bawah digunakan untuk mengulang analisis dengan data DBLP.
+
+### Siapkan lingkungan Python
+
+Jalankan perintah berikut dari direktori utama repositori.
 
 ```bash
 python3 -m venv .venv
@@ -39,15 +43,28 @@ python -m pip install -r requirements.txt
 mkdir -p data/raw
 ```
 
-Unduh [dump XML DBLP](https://dblp.org/xml/dblp.xml.gz) dan [DTD DBLP](https://dblp.org/xml/dblp.dtd). Simpan keduanya sebagai `data/raw/dblp.xml.gz` dan `data/raw/dblp.dtd`. Hasil di repositori berasal dari dump yang diunduh pada 19 November 2026. Dump DBLP diperbarui berkala, sehingga hasil dari unduhan lain dapat berbeda.
+### Siapkan data DBLP
 
-Untuk menjalankan alur notebook, buka JupyterLab dari direktori utama dan pilih `notebooks/DBLP_Association_Mining.ipynb`.
+Simpan kedua berkas berikut dalam direktori `data/raw/`.
+
+| Berkas | Lokasi |
+| --- | --- |
+| [Arsip XML DBLP](https://dblp.org/xml/dblp.xml.gz) | `data/raw/dblp.xml.gz` |
+| [DTD DBLP](https://dblp.org/xml/dblp.dtd) | `data/raw/dblp.dtd` |
+
+Eksperimen di repositori ini menggunakan arsip DBLP yang diunduh pada 19 November 2026. Pembaruan data DBLP dapat memengaruhi hasil pengulangan.
+
+### Jalankan notebook
+
+Buka notebook dengan perintah berikut, lalu jalankan sel dari atas ke bawah.
 
 ```bash
-jupyter lab
+jupyter lab notebooks/DBLP_Association_Mining.ipynb
 ```
 
-Alur analisis juga tersedia sebagai skrip. Skrip analisis menggunakan implementasi Apriori dan FP-Growth di `src/fpm.py`.
+### Jalankan melalui terminal
+
+Jalankan ketiga skrip berikut secara berurutan. Skrip analisis menggunakan Apriori dan FP-Growth dari `src/fpm.py`.
 
 ```bash
 python src/extract.py
@@ -55,4 +72,4 @@ python src/preprocess.py
 python src/analysis.py
 ```
 
-Menjalankan analisis dapat menulis ulang berkas hasil di `output/`.
+Kedua cara menjalankan analisis dapat menimpa berkas hasil di `output/`.
