@@ -1,1 +1,58 @@
-# Tubes-Datmin
+# Conference Popularity and Association Pattern Mining Using DBLP
+
+Proyek Data Mining ini menganalisis publikasi konferensi dan lokakarya yang tercatat sebagai `inproceedings` di DBLP pada 2015–2025. Data setelah prapemrosesan mencakup 1.997.196 publikasi, 1.745.848 penulis unik, dan 4.372 venue.
+
+[Notebook analisis](notebooks/DBLP_Association_Mining.ipynb) memuat metode, tabel, grafik, dan pembahasan dengan keluaran yang sudah tersimpan.
+
+## Ringkasan hasil
+
+NIPS (NeurIPS) menempati peringkat pertama berdasarkan jumlah publikasi dan jumlah penulis unik. Pada transaksi Author-Based, ICML dan NIPS merupakan pasangan yang paling sering muncul bersama. Apriori dan FP-Growth menghasilkan himpunan item yang sama pada keempat ambang *support*. FP-Growth lebih cepat pada ambang 0,1%, sedangkan Apriori lebih cepat pada ambang 0,5%, 1%, dan 2% dalam pengujian dengan `mlxtend`.
+
+![Peringkat sepuluh venue teratas menurut jumlah publikasi dan penulis unik](output/figures/venue-rankings-by-publications-and-authors.png)
+
+Lihat juga [tren publikasi per venue](output/figures/top-10-venue-publication-trends.png), [jumlah pola dan aturan menurut ambang support](output/figures/itemset-and-rule-counts-by-support.png), serta [tabel perbandingan algoritma](output/t6_performance.csv).
+
+## Metode
+
+Setiap venue diwakili oleh akronim dari kunci DBLP, misalnya `AAAI` dari `conf/aaai/...`. Transaksi Author-Based mencatat venue tempat seorang penulis pernah menerbitkan karya selama periode pengamatan. Transaksi Author-Year-Based mencatat venue untuk setiap pasangan penulis dan tahun.
+
+Apriori dan FP-Growth diuji pada ambang *support* 0,1%, 0,5%, 1%, dan 2% untuk transaksi Author-Based. Aturan asosiasi menggunakan ambang *confidence* 50%. Analisis temporal membandingkan transaksi Author-Year-Based dalam empat periode dari 2015 hingga 2025.
+
+## Struktur repositori
+
+| Lokasi | Isi |
+| --- | --- |
+| [`notebooks/`](notebooks/) | Notebook utama beserta keluaran eksperimen |
+| [`src/`](src/) | Skrip ekstraksi, prapemrosesan, penambangan pola, dan analisis |
+| [`output/`](output/) | Tabel hasil dalam format CSV |
+| [`output/figures/`](output/figures/) | Grafik dari keluaran notebook |
+| [`requirements.txt`](requirements.txt) | Dependensi Python |
+
+## Menjalankan analisis
+
+Dari direktori utama repositori, pasang dependensi dalam lingkungan virtual.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+mkdir -p data/raw
+```
+
+Unduh [dump XML DBLP](https://dblp.org/xml/dblp.xml.gz) dan [DTD DBLP](https://dblp.org/xml/dblp.dtd). Simpan keduanya sebagai `data/raw/dblp.xml.gz` dan `data/raw/dblp.dtd`. Hasil di repositori berasal dari dump yang diunduh pada 19 November 2026. Dump DBLP diperbarui berkala, sehingga hasil dari unduhan lain dapat berbeda.
+
+Untuk menjalankan alur notebook, buka JupyterLab dari direktori utama dan pilih `notebooks/DBLP_Association_Mining.ipynb`.
+
+```bash
+jupyter lab
+```
+
+Alur analisis juga tersedia sebagai skrip. Skrip analisis menggunakan implementasi Apriori dan FP-Growth di `src/fpm.py`.
+
+```bash
+python src/extract.py
+python src/preprocess.py
+python src/analysis.py
+```
+
+Menjalankan analisis dapat menulis ulang berkas hasil di `output/`.
